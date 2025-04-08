@@ -1,6 +1,5 @@
-import type { Serve } from "bun";
 import type { DefineCustomsMethods } from "./index_types";
-export declare function useServer(serverSettings: any & Serve, methods?: DefineCustomsMethods): Promise<void>;
+export declare function useServer(serverSettings: any, methods?: DefineCustomsMethods): Promise<void>;
 export declare function reloadServer(args: string[]): Promise<void>;
 /**
  * Sets up a file watcher on the specified paths and triggers a server reload

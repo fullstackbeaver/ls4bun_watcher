@@ -1,12 +1,13 @@
+import * as fs from 'fs';
+
 import type { Serve, Server }        from "bun";
 import type { DefineCustomsMethods } from "./index_types";
-import * as fs from 'fs';
 
 const customMethods         = {} as {[key: string]: Function};
 const definedServerSettings = {} as Serve;
 const server                = {} as Server;
 
-export async function useServer(serverSettings: any & Serve, methods?: DefineCustomsMethods) {
+export async function useServer(serverSettings: any, methods?: DefineCustomsMethods) {
   if (methods) {
     for (const [method, information] of Object.entries(methods)) {
       customMethods[method] = information.action;
@@ -15,7 +16,7 @@ export async function useServer(serverSettings: any & Serve, methods?: DefineCus
     Object.assign(definedServerSettings, serverSettings);
   }
   Object.assign(server, Bun.serve(serverSettings));
-  // console.log("server started!");
+  console.log("server started!"+serverSettings.host+":"+serverSettings.port);
 }
 
 export async function reloadServer(args: string[]) {
