@@ -6,7 +6,7 @@ const customMethods         = {} as {[key: string]: Function};
 const definedServerSettings = {} as Serve;
 const server                = {} as Server;
 
-export async function useServer(serverSettings: Serve, methods?: DefineCustomsMethods) {
+export async function useServer(serverSettings: any & Serve, methods?: DefineCustomsMethods) {
   if (methods) {
     for (const [method, information] of Object.entries(methods)) {
       customMethods[method] = information.action;
@@ -15,7 +15,7 @@ export async function useServer(serverSettings: Serve, methods?: DefineCustomsMe
     Object.assign(definedServerSettings, serverSettings);
   }
   Object.assign(server, Bun.serve(serverSettings));
-  console.log("server started!");
+  // console.log("server started!");
 }
 
 export async function reloadServer(args: string[]) {

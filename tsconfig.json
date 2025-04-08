@@ -1,27 +1,50 @@
 {
   "compilerOptions": {
     // Enable latest features
-    "lib": ["ESNext", "DOM"],
-    "target": "ESNext",
-    "module": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "target"         : "ESNext",
+    "module"         : "ESNext",
     "moduleDetection": "force",
-    "jsx": "react-jsx",
-    "allowJs": true,
-
+    "jsx"            : "react-jsx",
+    "allowJs"        : true,
     // Bundler mode
-    "moduleResolution": "bundler",
+    "moduleResolution"          : "bundler",
     "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "noEmit": true,
-
+    "verbatimModuleSyntax"      : true,
+  "noEmit"                    : false,       //true,
     // Best practices
-    "strict": true,
-    "skipLibCheck": true,
+    "strict"                    : true,
+    "skipLibCheck"              : true,
     "noFallthroughCasesInSwitch": true,
-
     // Some stricter flags (disabled by default)
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
-  }
+    "noUnusedLocals"                    : false,
+    "noUnusedParameters"                : false,
+    "noPropertyAccessFromIndexSignature": false,
+    // build package
+    "baseUrl"                         : "./src",
+    "declaration"                     : true,
+    "declarationMap"                  : false,
+  "emitDeclarationOnly"             : true,      // Génère seulement les fichiers .d.ts
+    "esModuleInterop"                 : true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir"                          : "./lib",
+    "paths"                           : {
+      "*": [
+        "./*"
+      ]
+    },
+    "preserveSymlinks": true,
+    "rootDir"         : "./src"
+  },
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "./node_modules",
+    "./lib",
+    "./example"
+  ]
 }

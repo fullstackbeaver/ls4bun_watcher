@@ -2,7 +2,7 @@ import { useServer, useWatcher } from "../src";
 
 useServer(
   {
-    error: (e) => new Response(e.message, { status: 500 }),
+    error: (e:Error) => new Response(e.message, { status: 500 }),
     port  : 4002,
     routes: {
       "/": new Response("OK")
