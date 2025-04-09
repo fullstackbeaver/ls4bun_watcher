@@ -1,4 +1,5 @@
-import * as fs from 'fs';
+import * as path from "path";
+import { watch } from "chokidar";
 
 import type { Serve, Server }        from "bun";
 import type { DefineCustomsMethods } from "./index_types";
@@ -40,12 +41,23 @@ export async function reloadServer(args: string[]) {
  * @param pathsToWatch - An array of file paths to monitor for changes.
  * @param reloadRules  - A function that returns the rules to determine how the server should be reloaded.
  */
-export function useWatcher(pathsToWatch: string[], reloadRules: Function) {
-  for (const path of pathsToWatch) {
-    fs.watch(path, (eventType, filename) => {
-      if (eventType === 'change') {
-        reloadServer(reloadRules(path));
-      }
-    });
-  }
+export function useWatcher(pathsToWatch: string[], reloadRules:Function) {
+  const watcher = watch(pathsToWatch, { persistent: true });
+
+  const restartScript = async (filePath: string) => {
+
+    console.log(`Change detected in the file : ${filePath}`); //TODO supprimer une foi le debug fini
+    console.log(`File folder modified : ${path.dirname(filePath)}`);
+
+    const extra = [] as string[];
+
+    filePath.endsWith(".scss") && extra.push("css");
+    // filePath.endsWith(".json") && extra.push("generateFileTree"); //TODO mettre à jour au moment de l'enregistrement
+
+    reloadServer(reloadRules());
+  };
+
+  watcher.on("change", (filePath: string) => {
+    restartScript(filePath);
+  });
 }

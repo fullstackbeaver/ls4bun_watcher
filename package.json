@@ -12,5 +12,8 @@
   "scripts": {
     "build": "bun run scripts/build.sh"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "chokidar": "^4.0.3"
+  }
 }
